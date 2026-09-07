@@ -7,6 +7,14 @@
   var progress = document.getElementById('progress');
   var reader = document.getElementById('reader');
   var KEY = 'ace-progress';
+  var memory = null; // fallback when localStorage is unavailable/throws
+
+  function safeGet() {
+    try { return localStorage.getItem(KEY); } catch (e) { return memory; }
+  }
+  function safeSet(v) {
+    try { localStorage.setItem(KEY, v); } catch (e) { memory = v; }
+  }
 
   function showSection(id, opts) {
     opts = opts || {};
@@ -14,8 +22,11 @@
     navItems.forEach(function (b) {
       b.classList.toggle('active', b.getAttribute('data-target') === id);
     });
-    if (!opts.silent) localStorage.setItem(KEY, id);
-    if (!opts.noScroll) reader.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    if (!opts.silent) safeSet(id);
+    if (!opts.noScroll) {
+      try { reader.scrollTo({ top: 0, behavior: 'auto' }); }
+      catch (e) { reader.scrollTop = 0; }
+    }
     updateProgressBar(id);
     injectChapterNav(id);
     sidenav.classList.remove('open');
@@ -58,7 +69,7 @@
   });
 
   document.getElementById('beginBtn').addEventListener('click', function () {
-    var saved = localStorage.getItem(KEY);
+    var saved = safeGet();
     showSection(saved && ids.indexOf(saved) > -1 ? saved : 'ch1');
   });
 
