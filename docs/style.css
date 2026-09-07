@@ -1,0 +1,76 @@
+:root{
+  --bg:#0b0f14; --panel:#111826; --border:#1d2937;
+  --text:#dbe4ee; --muted:#8b9bb4; --accent:#38bdf8;
+  --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--serif)}
+
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0%;z-index:50;transition:width .1s linear}
+
+#navToggle{
+  position:fixed;top:14px;left:14px;z-index:40;background:var(--panel);color:var(--accent);
+  border:1px solid var(--border);border-radius:8px;width:40px;height:40px;font-size:18px;cursor:pointer;
+}
+#sidenav{
+  position:fixed;top:0;left:-320px;width:300px;height:100%;background:var(--panel);
+  border-right:1px solid var(--border);overflow-y:auto;transition:left .25s ease;z-index:39;padding:70px 0 20px;
+}
+#sidenav.open{left:0}
+.nav-head{font-family:system-ui,sans-serif;color:var(--muted);text-transform:uppercase;
+  font-size:12px;letter-spacing:.08em;padding:0 20px 10px}
+.nav-item{
+  display:block;width:100%;text-align:left;background:none;border:none;color:var(--text);
+  font-family:system-ui,sans-serif;font-size:14px;padding:9px 20px;cursor:pointer;
+}
+.nav-item:hover{background:#0f1620;color:var(--accent)}
+.nav-item.active{color:var(--accent);border-left:3px solid var(--accent);padding-left:17px}
+.nav-foot{padding:16px 20px 0;font-family:system-ui,sans-serif;font-size:13px;border-top:1px solid var(--border);margin-top:12px}
+.nav-foot a{color:var(--muted);text-decoration:none}
+.nav-foot a:hover{color:var(--accent)}
+
+#reader{max-width:680px;margin:0 auto;padding:60px 24px 100px}
+.chapter{display:none}
+.chapter.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h1{font-size:28px;line-height:1.3;font-weight:600;margin:0 0 30px;color:#fff}
+.ch-title{display:block;color:var(--accent);font-size:20px;font-style:italic;margin-top:6px}
+h2.il-title{font-size:20px;color:#fff;margin:0 0 4px;font-style:italic}
+.interlude-tag{font-family:system-ui,sans-serif;color:var(--accent);text-transform:uppercase;
+  font-size:11px;letter-spacing:.12em;margin-top:44px}
+p{font-size:18px;line-height:1.85;margin:0 0 20px;color:var(--text)}
+p.verse{color:var(--muted);font-style:italic;padding-left:16px;border-left:2px solid var(--border)}
+img.art{width:100%;border-radius:10px;margin:24px 0;display:block;border:1px solid var(--border)}
+.tag{color:var(--muted);font-style:italic;margin-top:-14px}
+
+.coverpage{text-align:center;padding-top:20px}
+.cover-img{width:220px;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);margin-bottom:28px}
+.cover-title{font-size:34px;color:#fff;margin:0 0 10px;line-height:1.25}
+.cover-by{color:var(--accent);font-family:system-ui,sans-serif;letter-spacing:.03em;margin:0 0 24px}
+.cover-desc{color:var(--muted);font-size:16px;line-height:1.7;max-width:520px;margin:0 auto 30px}
+.begin-btn{
+  font-family:system-ui,sans-serif;background:var(--accent);color:#04141f;border:none;
+  border-radius:8px;padding:12px 26px;font-size:15px;font-weight:600;cursor:pointer;
+}
+.begin-btn:hover{opacity:.88}
+.cover-alt{font-family:system-ui,sans-serif;font-size:13px;color:var(--muted);margin-top:18px}
+.cover-alt a{color:var(--accent);text-decoration:none}
+
+.chapternav{display:flex;justify-content:space-between;gap:12px;margin-top:52px;
+  font-family:system-ui,sans-serif}
+.chapternav button{
+  background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;
+  padding:10px 16px;font-size:14px;cursor:pointer;flex:1;
+}
+.chapternav button:hover{border-color:var(--accent);color:var(--accent)}
+
+.endnote{text-align:center;color:var(--muted);font-family:system-ui,sans-serif;
+  font-size:13px;margin-top:60px;padding-top:24px;border-top:1px solid var(--border)}
+.endnote a{color:var(--accent);text-decoration:none;display:inline-block;margin-top:6px}
+
+@media (max-width:680px){
+  #reader{padding:60px 18px 80px}
+  h1{font-size:24px}
+  p{font-size:17px}
+}
